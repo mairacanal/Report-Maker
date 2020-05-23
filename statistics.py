@@ -31,6 +31,7 @@ def generate_data_x_data (data, data2, dataType, dataType2):
 
         # Save graph
         plt.savefig(f'graph_{dataType}_x_{dataType2}.png', dpi=96, bbox_inches='tight')
+        plt.clf()
         return 1
 
 # ----------------------------------------------------------------------------------------------
@@ -60,6 +61,7 @@ def generate_compare_graph (data1, data2, data3, time, dataType1, dataType2, dat
 
     # Save graph
     plt.savefig(f'graph_compare_{comparing_data}.png', dpi=96, bbox_inches='tight')
+    plt.clf()
 
 # ----------------------------------------------------------------------------------------------
 

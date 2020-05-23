@@ -68,11 +68,11 @@ def generate_map (latitude, longitude):
     df = pd.DataFrame(list(zip(latitude, longitude)), columns= ['Latitude', 'Longitude'])
 
     # Create a map
-    map = fl.Map(location=[-15.1277495, -20.3937137], tiles="OpenStreetMap", zoom_start=4)
+    map = fl.Map(location=[-22.5254886, -45.8804367], tiles="OpenStreetMap", zoom_start=9)
 
     # Mark all coordinates
     for row in range(0,len(df)):
-        fl.CircleMarker((df.loc[row, 'Latitude'], df.loc[row, 'Longitude']), radius=3, weight=2, color='red', fill_color='red', fill_opacity=.5).add_to(map)
+        fl.CircleMarker((df.loc[row, 'Latitude'], df.loc[row, 'Longitude']), radius=7, weight=5, color='red', fill_color='red', fill_opacity=.5).add_to(map)
 
     # Save the map as an html    
     map.save('Map.html')

@@ -1,9 +1,28 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 import folium as fl
 from time import sleep
 import selenium.webdriver
+
+# --------------------------------------------------------------------------------------------
+
+# Uses the 1.5xIQR method to identify outliers and substitute them with a NaN
+
+def outliers_clean (data, sorted_data):
+
+    Q1 = np.percentile(sorted_data, 25)
+    Q3 = np.percentile(sorted_data, 75)
+    IQR = Q3 - Q1
+    lower_range = Q1 - (1.5 * IQR)
+    upper_range = Q3 + (1.5 * IQR)
+
+    for c, sample in enumerate(data):
+        if sample > upper_range or sample < lower_range:
+            data[c] = np.NaN
+
+    return (data)
 
 # --------------------------------------------------------------------------------------------
 
@@ -88,3 +107,21 @@ def generate_map (latitude, longitude):
     driver.save_screenshot('map.png')
 
 # ----------------------------------------------------------------------------------------------
+
+def generate_scatter_plot (data, data2, dataType, dataType2):
+
+    df = pd.DataFrame(list(zip(data, data2)), columns= [f'{dataType}', f'{dataType2}'])
+
+    sns.regplot(x=df[f'{dataType2}'], y=df[f'{dataType}'], line_kws={"color":"r","alpha":0.5,"lw":4}, scatter_kws={"color":"blue","alpha":0.3, "s":10})
+
+    # Add titles
+    plt.title(f"{dataType} x {dataType2}", loc='left', fontsize=12, fontweight=0, color='black')
+    plt.xlabel(f'{dataType2}')
+    plt.ylabel(f"{dataType}")
+
+    # Save graph
+    plt.savefig(f'scatterplot_{dataType}_x_{dataType2}.png', dpi=96, bbox_inches='tight')
+    plt.clf()
+
+# ----------------------------------------------------------------------------------------------
+

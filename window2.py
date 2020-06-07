@@ -5,8 +5,8 @@ import tkinter.font as tkFont
 class Window2:
     def __init__ (self, master):
 
-        self.zenith_logo_render = PhotoImage(file='c:/Users/Operador/Downloads/USP/ZENITH/REPORT MAKER/Códigos/IMAGES/LogoZ.png')
-        self.zenith_label_render = PhotoImage(file='c:/Users/Operador/Downloads/USP/ZENITH/REPORT MAKER/Códigos/IMAGES/zenith-faixa.png')
+        self.zenith_logo_render = PhotoImage(file='IMAGES/LogoZ.png')
+        self.zenith_label_render = PhotoImage(file='IMAGES/zenith-faixa.png')
 
         self.master = master
         self.master.geometry("765x575")

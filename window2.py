@@ -5,20 +5,24 @@ import tkinter.font as tkFont
 class Window2:
     def __init__ (self, master):
 
-        self.zenith_logo_render = PhotoImage(file='IMAGES/LogoZ.png')
-        self.zenith_label_render = PhotoImage(file='IMAGES/zenith-faixa.png')
+        # Zenith's logo render
+        self.zenith_logo_render = PhotoImage(file='c:/Users/Operador/Downloads/USP/ZENITH/REPORT MAKER/Códigos/IMAGES/LogoZ.png')
+        self.zenith_label_render = PhotoImage(file='c:/Users/Operador/Downloads/USP/ZENITH/REPORT MAKER/Códigos/IMAGES/zenith-faixa.png')
 
+        # Window's customize
         self.master = master
         self.master.geometry("765x575")
         self.master.title("Report Maker")
         self.master.iconphoto(False, self.zenith_logo_render)
         self.master.config(bg="black")
 
+        # Define text fontstyle
         fontStyle = tkFont.Font(
                         family="Helvetica", 
                         size=10, 
                         weight="bold")
 
+        # All widgets definition
         Conteiner1 = Frame(self.master)
         Conteiner (Conteiner1, self.master)
         ButtonFinish = Button(
@@ -36,6 +40,7 @@ class Window2:
                             highlightthickness=0, 
                             borderwidth=0)
 
+        # Positioning all widgets in the master root
         ZenithLabel.grid(
                         row=0, 
                         column=0, 
@@ -53,9 +58,12 @@ class Window2:
                         column=1, 
                         sticky=E, 
                         padx=20)
+
+    # Function to generates a LaTex file with the written text
     def PyLaTex_function ():
         txt = TextArea.get('1.0', END)
 
+# Sets a conteiner with the TextArea and the ScrollBar
 class Conteiner:
     def __init__ (self, conteiner, master):
 

@@ -51,13 +51,17 @@ class Window2:
         Conteiner3 = Frame(master)
         self.SectionText3 = TextConteiner(Conteiner3, master)
 
-        self.val_checkbox = BooleanVar()
-        CheckBox = Checkbutton( master, 
+        ''' Sets a boolean variable to indicate the state of the CheckButton. From the beginning, the box is checked and val_checkbox returns 
+        True. If the box is unchecked, val_checkbox returns False.'''
+
+        self.val_checkbox = BooleanVar(value=True)
+        self.CheckBox = Checkbutton( master, 
                                 text="Inserir Imagens",
                                 variable = self.val_checkbox,
+                                font= fontStyle,
                                 bg= "Black",
-                                fg= "White", 
-                                font = fontStyle)
+                                fg= "White",
+                                selectcolor="Black")
 
         # Positioning all widgets in the master root
         ZenithLabel.grid(
@@ -79,9 +83,9 @@ class Window2:
                         sticky=E, 
                         padx=20,
                         pady=10)
-        CheckBox.grid(row=8,
-                      column=0,
-                      padx=20)
+        self.CheckBox.grid (row=8,
+                            column=0,
+                            padx=20)
 
     # Function to generates a LaTex file with the written text
     def PyLaTex_function (self):
@@ -93,6 +97,7 @@ class Window2:
         section1_text = self.SectionText1.get_text()
         section2_text = self.SectionText2.get_text()
         section3_text = self.SectionText3.get_text()
+        
 
 # Sets the title's entry
 class Title:

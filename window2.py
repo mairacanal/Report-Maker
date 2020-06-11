@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter.scrolledtext import ScrolledText
 import tkinter.font as tkFont
 
+# Represents all the second window
 class Window2:
     def __init__ (self, master):
 
@@ -11,7 +12,7 @@ class Window2:
 
         # Window's customize
         self.master = master
-        self.master.geometry("765x575")
+        self.master.geometry("1000x680")
         self.master.title("Report Maker")
         self.master.iconphoto(False, self.zenith_logo_render)
         self.master.config(bg="black")
@@ -23,8 +24,6 @@ class Window2:
                         weight="bold")
 
         # All widgets definition
-        Conteiner1 = Frame(self.master)
-        Conteiner (Conteiner1, self.master)
         ButtonFinish = Button(
                             self.master, 
                             text="Finish", 
@@ -34,11 +33,31 @@ class Window2:
                             padx=5, 
                             font=fontStyle,
                             command= self.PyLaTex_function)
-        ZenithLabel = Label(
-                            self.master, 
+        ZenithLabel = Label(self.master, 
                             image= self.zenith_label_render, 
                             highlightthickness=0, 
                             borderwidth=0)
+
+        self.MainTitle = Title(master, fontStyle, "Título", 1)
+        self.SectionName1 = Title(master, fontStyle, "Seção 1", 2)
+        Conteiner1 = Frame(master)
+        self.SectionText1 = TextConteiner(Conteiner1, master)
+
+        self.SectionName2 = Title(master, fontStyle, "Seção 2", 4)
+        Conteiner2 = Frame(master)
+        self.SectionText2 = TextConteiner(Conteiner2, master)
+
+        self.SectionName3 = Title(master, fontStyle, "Seção 3", 6)
+        Conteiner3 = Frame(master)
+        self.SectionText3 = TextConteiner(Conteiner3, master)
+
+        self.val_checkbox = BooleanVar()
+        CheckBox = Checkbutton( master, 
+                                text="Inserir Imagens",
+                                variable = self.val_checkbox,
+                                bg= "Black",
+                                fg= "White", 
+                                font = fontStyle)
 
         # Positioning all widgets in the master root
         ZenithLabel.grid(
@@ -47,49 +66,91 @@ class Window2:
                         columnspan=2, 
                         padx=0, 
                         pady=0)
-        Conteiner1.grid(
-                        row=1, 
-                        column=0, 
-                        columnspan=2, 
-                        padx=20, 
-                        pady=10)
+        Conteiner1.grid(row=3,
+                        column=1,
+                        padx=10)
+        Conteiner2.grid(row=5,
+                        column=1)
+        Conteiner3.grid(row=7,
+                        column=1)
         ButtonFinish.grid(
-                        row=2, 
+                        row=8, 
                         column=1, 
                         sticky=E, 
-                        padx=20)
+                        padx=20,
+                        pady=10)
+        CheckBox.grid(row=8,
+                      column=0,
+                      padx=20)
 
     # Function to generates a LaTex file with the written text
-    def PyLaTex_function ():
-        txt = TextArea.get('1.0', END)
+    def PyLaTex_function (self):
+        maintitle = self.MainTitle.get_title()
+        section1_title = self.SectionName1.get_title()
+        section2_title = self.SectionName2.get_title()
+        section3_title = self.SectionName3.get_title()
 
-# Sets a conteiner with the TextArea and the ScrollBar
-class Conteiner:
+        section1_text = self.SectionText1.get_text()
+        section2_text = self.SectionText2.get_text()
+        section3_text = self.SectionText3.get_text()
+
+# Sets the title's entry
+class Title:
+    def __init__ (self, master, fontStyle, name_title, row):
+        self.master = master
+
+        TitleLabel = Label( self.master,
+                            text= name_title,
+                            bg="black",
+                            fg="white",
+                            font=fontStyle)
+        self.TitleEntry = Entry (self.master,
+                                 width = 132)   
+
+        TitleLabel.grid(row=row,
+                        column=0,
+                        padx=12)
+        self.TitleEntry.grid(
+                        row=row,
+                        column=1,
+                        pady=5)
+
+    # Returns the content of the Entry
+    def get_title (self):
+        title = self.TitleEntry.get()
+        return title
+
+# Sets the Text Area to get the report content
+class TextConteiner:
+
+    # Configure the Text Area attached to its scrollbar
     def __init__ (self, conteiner, master):
 
-        TextArea = Text(
-                        conteiner, 
-                        width=88, 
-                        height=25)
+        self.TextArea = Text(conteiner, 
+                        width=97, 
+                        height=8)
         ScrollBar = Scrollbar(
                         conteiner, 
                         orient=VERTICAL)
 
-        ScrollBar.config(command=TextArea.yview)
-        TextArea.config(yscrollcommand=ScrollBar.set)
-        TextArea.insert(INSERT, "%insert a LaTex code")
+        ScrollBar.config(command=self.TextArea.yview)
+        self.TextArea.config(yscrollcommand=ScrollBar.set)
         ScrolledText(master)
 
         ScrollBar.grid(
                     row=0, 
-                    column=1,
-                    ipady=176.45, 
+                    column=1, 
                     sticky=W)
-        TextArea.grid(
+        self.TextArea.grid(
                     row=0, 
                     column=0, 
-                    sticky=E)
-        
+                    sticky=E) 
+    
+    # Returns the content of the Text Area
+    def get_text (self):
+        text = self.TextArea.get("1.0", END)
+        return text
+
 root = Tk()
 window2 = Window2(root)
 root.mainloop()

@@ -14,8 +14,6 @@ from window2 import Window2
 class Window1:
 
     def __init__ (self, master, root):
-
-        # -----------------------------------------------------------------------------------------------------------------------------------
         self.master = master
         self.root = root
         
@@ -27,7 +25,6 @@ class Window1:
                         family="Helvetica", 
                         size=10, 
                         weight="bold")
-        # -----------------------------------------------------------------------------------------------------------------------------------
     
         content = Frame (master, width=450, height=650, background="black")
 

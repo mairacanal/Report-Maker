@@ -20,7 +20,6 @@ class Window1:
         self.root = root
         
          # Zenith's logo render
-        self.zenith_logo_render  = PhotoImage(file='../IMAGES/LogoZ.png')
         self.zenith_label_render = PhotoImage(file='../IMAGES/zenith-faixa.png')
 
         # Define text fontstyle

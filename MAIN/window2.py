@@ -10,8 +10,7 @@ class Window2:
     def __init__ (self, master, root):
 
         # Zenith's logo render
-        self.zenith_logo_render = PhotoImage(file='c:/Users/Operador/Downloads/USP/ZENITH/REPORT MAKER/Códigos/IMAGES/LogoZ.png')
-        self.zenith_label_render = PhotoImage(file='c:/Users/Operador/Downloads/USP/ZENITH/REPORT MAKER/Códigos/IMAGES/zenith-faixa.png')
+        self.zenith_label_render = PhotoImage(file='../IMAGES/zenith-faixa.png')
 
         # Window's customize
         self.master = master
